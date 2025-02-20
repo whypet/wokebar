@@ -40,19 +40,22 @@ static const char title[] = "wokebar";
 void xwindow_init_display(xdisplay_t *display, char *name) {
 	xcb_screen_iterator_t iter;
 	int32_t               screen_index;
+	/* todo */
 	display->c = xcb_connect(name, &screen_index);
 	assert(display->c != NULL);
 	iter = xcb_setup_roots_iterator(xcb_get_setup(display->c));
+
 	for (; iter.rem; --screen_index, xcb_screen_next(&iter)) {
 		display->screen = iter.data;
 
-		printf("\n");
-		printf("Informations of display->screen %ld:\n", display->screen->root);
-		printf("  width.........: %d\n", display->screen->width_in_pixels);
-		printf("  height........: %d\n", display->screen->height_in_pixels);
-		printf("  white pixel...: %ld\n", display->screen->white_pixel);
-		printf("  black pixel...: %ld\n", display->screen->black_pixel);
-		printf("\n");
+		/*printf("\n");*/
+		/*printf("Informations of display->screen %ld:\n",
+		 * display->screen->root);*/
+		/*printf("  width.........: %d\n", display->screen->width_in_pixels);*/
+		/*printf("  height........: %d\n", display->screen->height_in_pixels);*/
+		/*printf("  white pixel...: %ld\n", display->screen->white_pixel);*/
+		/*printf("  black pixel...: %ld\n", display->screen->black_pixel);*/
+		/*printf("\n");*/
 	}
 }
 
