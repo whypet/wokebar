@@ -32,3 +32,5 @@ packagecache
 
 *.pyc
 /*venv*
+
+/.cache

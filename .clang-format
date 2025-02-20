@@ -1,0 +1,8 @@
+BasedOnStyle: LLVM
+Language: Cpp
+UseTab: AlignWithSpaces
+IndentWidth: 4
+TabWidth: 4
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+InsertNewlineAtEOF: true

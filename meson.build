@@ -1,4 +1,4 @@
-project('wokebar', 'c', default_options: ['c_std=c90'])
+project('wokebar', 'c', default_options : ['c_std=c89', 'warning_level=3'])
 
 deps = [ dependency('xcb') ]
 src = files(
@@ -7,4 +7,4 @@ src = files(
 )
 # incdir = include_directories('.')
 
-executable('wokebar', dependencies: deps, sources: src)
+executable('wokebar', dependencies : deps, sources : src)
