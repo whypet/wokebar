@@ -1,22 +1,28 @@
-#ifndef _XWINDOW_H_
-#define _XWINDOW_H_
+#ifndef WOKEXWINDOW_H
+#define WOKEXWINDOW_H
+
+#include <stdbool.h>
+#include <stdint.h>
 
 #include <xcb/xcb.h>
 
 typedef struct {
 	xcb_connection_t *c;
-	xcb_screen_t     *screen;
-} xdisplay_t;
+	size_t            screen_count;
+	xcb_screen_t     *screens;
+} xserver_t;
 
 typedef struct {
-	xcb_window_t   win;
-	xcb_gcontext_t gc;
-	xdisplay_t    *display;
-	int32_t        height;
+	xcb_connection_t *c;
+	xcb_screen_t     *screen;
+	xcb_window_t      win;
+	xcb_gcontext_t    gc;
+	int32_t           height;
 } xwindow_t;
 
-void xwindow_init_display(xdisplay_t *display, char *name);
-void xwindow_create(xwindow_t *w, xdisplay_t *display, int32_t height);
-void xwindow_loop(xwindow_t *w);
+void xwindow_init_display(char *name, xserver_t *server);
+void xwindow_create(xcb_connection_t *c, xcb_screen_t *screen, int32_t height,
+                    xwindow_t *w);
+bool xwindow_update(xwindow_t *w);
 
 #endif

@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "font.h"
 #include "xwindow.h"
 
 void print_help(FILE *stream) {
@@ -16,12 +17,12 @@ void print_help(FILE *stream) {
 
 int main(int argc, char *argv[]) {
 	int32_t opt;
-	char   *server;
+	char   *servername;
 
-	xdisplay_t display;
-	xwindow_t  w;
+	xserver_t server;
+	xwindow_t w;
 
-	server = NULL;
+	servername = NULL;
 
 	while ((opt = getopt(argc, argv, "hs:")) != -1) {
 		switch (opt) {
@@ -29,7 +30,7 @@ int main(int argc, char *argv[]) {
 			print_help(stdout);
 			return EXIT_SUCCESS;
 		case 's':
-			server = optarg;
+			servername = optarg;
 			break;
 		default:
 			print_help(stderr);
@@ -37,13 +38,16 @@ int main(int argc, char *argv[]) {
 		}
 	}
 
-	xwindow_init_display(&display, server);
+	xwindow_init_display(servername, &server);
+	font_init();
 
 	memset(&w, 0, sizeof(w));
-	xwindow_create(&w, &display, 25);
+	xwindow_create(server.c, &server.screens[0], 25, &w);
 
-	xwindow_loop(&w);
-	pause();
+	while (xwindow_update(&w))
+		;
+
+	font_free();
 
 	return EXIT_SUCCESS;
 }
