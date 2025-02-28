@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#include "conf.h"
 #include "font.h"
 #include "xwindow.h"
 
@@ -19,6 +20,8 @@ int main(int argc, char *argv[]) {
 	int32_t opt;
 	char   *servername;
 
+	FILE     *config_file;
+	config_t  config;
 	xserver_t server;
 	xwindow_t w;
 
@@ -37,6 +40,13 @@ int main(int argc, char *argv[]) {
 			return EXIT_FAILURE;
 		}
 	}
+
+	config_file = conf_open();
+	if (config_file == NULL)
+		return EXIT_FAILURE;
+	memset(&config, 0, sizeof(config));
+	if (!conf_read(config_file, &config))
+		return EXIT_FAILURE;
 
 	xwindow_init_display(servername, &server);
 	font_init();

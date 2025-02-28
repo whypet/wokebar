@@ -13,6 +13,7 @@ deps = [
 src = files(
   'conf.c',
   'font.c',
+  'lib.c',
   'wokebar.c',
   'xwindow.c',
 )

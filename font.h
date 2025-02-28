@@ -6,7 +6,7 @@
 
 void    font_init(void);
 void    font_free(void);
-int32_t font_search(const char *name, const char *font_style, double font_size,
-                    char *path, size_t path_size);
+int32_t font_search(const char *family, const char *font_style,
+                    double font_size, char *path, size_t path_size);
 
 #endif

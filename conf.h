@@ -8,9 +8,10 @@
 typedef struct {
 	char *title;
 	struct {
-		char  *font;
+		char  *family;
 		char  *font_style;
 		double font_size;
+		double pixel_size;
 	} text;
 	struct {
 		uint32_t back;
@@ -18,6 +19,7 @@ typedef struct {
 	} color;
 } config_t;
 
-bool conf_read(FILE *file, config_t *config);
+FILE *conf_open(void);
+bool  conf_read(FILE *file, config_t *config);
 
 #endif
